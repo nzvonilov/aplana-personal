@@ -1,0 +1,117 @@
+@(title: String)
+@main(title) {
+<script type="text/javascript">
+    $( document.body ).on( 'click', '.dropdown-menu li', function( event ) {
+
+    var $target = $( event.currentTarget );
+
+    $target.closest( '.form-group' )
+    .find( '[data-bind="label"]' ).text( $target.text() )
+    .end()
+    .children( '.dropdown-toggle' ).dropdown( 'toggle' );
+
+    return false;
+    });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("href") // activated tab
+    alert(target);
+    });
+</script>
+    <div class="container">
+        <h1>Добавление сотрудника</h1>
+        <form action="@routes.Application.create_employee()" method="GET" accept-charset="utf-8">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#main" data-toggle="tab">Основная</a></li>
+            <li class=""><a href="#address" data-toggle="tab">Адрес</a></li>
+            <li class=""><a href="#project" data-toggle="tab">Проект</a></li>
+        </ul>
+            <br>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="main">
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Фамилия" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Имя" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Отчетство" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Телефон" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="address">
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Город" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Улица" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Дом" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Корпус" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="text" class="form-control" placeholder="Квартира" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="project">
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <button id = type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span data-bind="label">Выберите заказчика</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" id="test">
+                        @Application.getCompanies.findSet().map { compamy =>
+                            <li><a href="#">@compamy.name</a></li>
+                        }
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <button id = type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span data-bind="label">Выберите проект</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" id="test">
+                        @Application.getProjects.findSet().map { project =>
+                            <li><a href="#">@project.name</a></li>
+                        }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <button type="btn" class="btn btn-primary">Сохранить</button>
+        </form>
+
+    </div>
+}

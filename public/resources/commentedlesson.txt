@@ -1,0 +1,11 @@
+package ru.aplana.lesson;
+
+для решения задания надо
+закомментировать некомпилируемый код
+public class Lesson{
+    основной метод Java
+    public static void main(String args[]){
+        этот метод выводит на консоль переданный текст
+        System.out.println("Этот текст выводится на консоль");
+    }
+}

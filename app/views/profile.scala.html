@@ -1,0 +1,18 @@
+@(localUser: models.User = null)
+
+@import com.feth.play.module.pa.views.html._
+
+@main(Messages("playauthenticate.profile.title"),"profile") {
+
+    <h1>@Messages("playauthenticate.profile.title")</h1>
+    <p>
+    Ваше имя @localUser.name, ваш email @if(!localUser.email) {<em>&lt;unknown&gt;</em>.} else {
+    	@localUser.email
+
+    }
+
+    <ul>
+    	<li><a href="@routes.Account.changePassword">@Messages("playauthenticate.profile.password_change")</a></li>
+    </ul>
+    </p>
+}
